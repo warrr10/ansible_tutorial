@@ -4,16 +4,20 @@
   become: true
   tasks:
 
-  - name: update repository index
+  - name: install updates
     apt:
+      upgrade: dist
       update_cache: yes
+    when: ansible_distribution == "Ubuntu"
 
-  - name: install apache2 package
-    apt:
-      name: apache2
-      state: latest
+- hosts: servers
+  become: true
+  tasks:
 
-  - name: add php support for apache
+  - name: install apache2 & php support for apache packages
     apt:
-      name: libapache2-mod-php
+      name: 
+        - apache2
+        - libapache2-mod-php
       state: latest
+    when: ansible_distribution == "Ubuntu"
