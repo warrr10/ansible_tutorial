@@ -1,0 +1,4 @@
+- name: add ssh key for war
+  authorized_key:
+    user: war
+    key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAQ9OC86aVugNX06hQzwO3g8tV9c0dTFx7nL1afIpVmg ansible"
