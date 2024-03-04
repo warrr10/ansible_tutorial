@@ -1,4 +1,10 @@
-[servers]
-fauzan@5.6.7.120
+[web_servers]
 5.6.7.121
+
+[db_servers]
 5.6.7.124
+
+[file_servers]
+fauzan@5.6.7.120
+
+
