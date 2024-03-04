@@ -1,0 +1,40 @@
+---
+
+- hosts: all
+  become: true
+  pre_tasks:
+
+  - name: install updates
+    tags: always
+    apt:
+      upgrade: dist
+      update_cache: yes
+    when: ansible_distribution == "Ubuntu"
+
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: create war user
+    tags: always
+    user:
+      name: war
+      groups: root
+
+  - name: add ssh key for war
+    tags: always
+    authorized_key:
+      user: war
+      key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAQ9OC86aVugNX06hQzwO3g8tV9c0dTFx7nL1afIpVmg ansible"
+
+  - name: add sudoers file for war
+    tags: always
+    copy:
+      src: sudoer_war
+      dest: /etc/sudoers.d/war
+      owner: root
+      group: root
+      mode: 0440
+
+
